@@ -4,7 +4,7 @@ import Header from './components/Header';
 import ProductList from './components/ProductList';
 import CartPage from './pages/CartPage';
 import './styles/app.css';
-import ProductDetailPage from './components/ProductDetailPage';
+import ProductDetailPage from './pages/ProductDetailPage';
 
 const App: React.FC = () => {
   return (
