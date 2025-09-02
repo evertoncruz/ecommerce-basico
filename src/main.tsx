@@ -12,7 +12,7 @@ import './styles/app.css';
 import { HttpLink } from '@apollo/client';
 
 const client = new ApolloClient({
-  link: new HttpLink({ uri: 'http://localhost:4000/graphql' }),
+  link: new HttpLink({ uri: '/api/graphql' }),
   cache: new InMemoryCache(), // O cache gerencia os dados das suas queries
 });
 
