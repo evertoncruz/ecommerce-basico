@@ -1,10 +1,10 @@
 /* src/styles/app.css */
 :root {
-  --primary-color: #007bff;
-  --bg-color: #f4f7f9;
-  --card-bg: #ffffff;
-  --text-color: #333;
-  --border-color: #ddd;
+  --primary-color: #FF0000; /* Vermelho vibrante */
+  --bg-color: #FFFFFF; /* Fundo branco */
+  --card-bg: #FFFFFF; /* Fundo dos cards branco */
+  --text-color: #000000; /* Texto preto */
+  --border-color: #333333; /* Borda cinza escuro */
 }
 
 body {
@@ -67,7 +67,7 @@ body {
   position: absolute;
   top: 0;
   right: 0;
-  background-color: red;
+  background-color: #000000; /* Preto */
   color: white;
   border-radius: 50%;
   padding: 0.2rem 0.5rem;
@@ -121,7 +121,7 @@ body {
 
 .product-card p {
   font-size: 1.1rem;
-  color: #666;
+  color: #555;
   flex-grow: 1;
 }
 
@@ -137,7 +137,7 @@ body {
 }
 
 .product-card button:hover {
-  background-color: #0056b3;
+  background-color: #CC0000; /* Tom mais escuro do vermelho */
 }
 
 /* Estilos da Página de Detalhes do Produto */
@@ -191,7 +191,7 @@ body {
 }
 
 .product-detail button:hover {
-  background-color: #0056b3;
+  background-color: #CC0000; /* Tom mais escuro do vermelho */
 }
 
 @media (min-width: 768px) {
@@ -283,7 +283,7 @@ body {
 
 .quantity-controls button {
   background-color: #eee;
-  color: #333;
+  color: var(--text-color);
   border: 1px solid #ccc;
   padding: 0.25rem 0.75rem;
   cursor: pointer;
@@ -306,7 +306,7 @@ body {
 }
 
 .remove-button {
-  background-color: #dc3545;
+  background-color: #DC0000; /* Vermelho mais escuro para o botão de remover */
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -316,7 +316,7 @@ body {
 }
 
 .remove-button:hover {
-  background-color: #c82333;
+  background-color: #A00000; /* Tom mais escuro */
 }
 
 .cart-page h3 {
@@ -343,7 +343,7 @@ body {
 }
 
 .clear-cart-button {
-  background-color: #f0ad4e;
+  background-color: #AAAAAA; /* Cinza para o botão secundário */
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -354,7 +354,7 @@ body {
 }
 
 .clear-cart-button:hover {
-  background-color: #ec971f;
+  background-color: #888888; /* Tom mais escuro */
 }
 
 /* Media Queries para Responsividade */
