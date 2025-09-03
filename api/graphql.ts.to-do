@@ -87,15 +87,21 @@ const apolloServer = new ApolloServer({
 // Inicialização do Express
 const app = express();
 
-// Inicia o servidor Apollo de forma assíncrona e aplica o middleware.
-// Esta função é chamada uma única vez.
-async function startApolloServer() {
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app, path: '/' });
+// A variável global que armazenará o handler da nossa API.
+let apolloHandler: (req: Request, res: Response) => void;
+
+// Função de inicialização
+async function initializeServer() {
+  if (!apolloHandler) {
+    await apolloServer.start();
+    apolloServer.applyMiddleware({ app, path: '/' });
+    apolloHandler = app;
+  }
+  return apolloHandler;
 }
 
-// Chama a função de inicialização do servidor.
-startApolloServer();
-
-// Exporta o app do Express, que agora já tem o middleware do Apollo aplicado.
-export default app;
+// Exporta uma função assíncrona que executa o handler.
+export default async (req: Request, res: Response) => {
+  const handler = await initializeServer();
+  handler(req, res);
+};
