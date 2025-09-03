@@ -76,7 +76,6 @@ const resolvers = {
   },
 };
 
-// Configuração do Apollo Server
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
@@ -85,16 +84,26 @@ const apolloServer = new ApolloServer({
   ],
 });
 
-// Inicialização e exportação como uma função Vercel
-const app = express();
+// A variável global que armazenará o handler da nossa API.
+let apiHandler: express.Application;
 
-const startApolloServer = async () => {
-  await apolloServer.start();
-  apolloServer.applyMiddleware({ app: app as express.Application, path: '/' });
+async function startApolloServer() {
+  if (!apolloServer) {
+    throw new Error('Apollo Server not initialized');
+  }
+
+  // Se o handler já existe, o servidor já foi iniciado.
+  // Isso evita que o servidor seja iniciado em cada requisição (problema de cold start).
+  if (!apiHandler) {
+    await apolloServer.start();
+    apiHandler = express();
+    apolloServer.applyMiddleware({ app: apiHandler as express.Application, path: '/' });
+  }
+
+  return apiHandler;
+}
+
+export default async (req: Request, res: Response) => {
+  const handler = await startApolloServer();
+  handler(req, res);
 };
-
-startApolloServer();
-
-// O Vercel espera que a instância do Express seja exportada diretamente.
-// Isso permite que o Vercel a utilize como o handler para a sua função serverless.
-export default app;
