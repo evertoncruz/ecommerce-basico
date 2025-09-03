@@ -86,13 +86,15 @@ const apolloServer = new ApolloServer({
 });
 
 // Inicialização e exportação como uma função Vercel
-const startServer = async () => {
-  await apolloServer.start();
-  const app = express();
-  apolloServer.applyMiddleware({ app: app as express.Application, path: '/' });
+const app = express();
 
-  // Retorna a função de handler do express
-  return (req: Request, res: Response) => app(req, res);
+const startApolloServer = async () => {
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app: app as express.Application, path: '/' });
 };
 
-export default startServer();
+startApolloServer();
+
+// O Vercel espera que a instância do Express seja exportada diretamente.
+// Isso permite que o Vercel a utilize como o handler para a sua função serverless.
+export default app;
