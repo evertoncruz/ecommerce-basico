@@ -87,13 +87,13 @@ const apolloServer = new ApolloServer({
 // A variável global que armazenará o handler da nossa API.
 let apiHandler: express.Application;
 
+// Função assíncrona para iniciar o servidor, mas que é chamada apenas uma vez.
 async function startApolloServer() {
   if (!apolloServer) {
     throw new Error('Apollo Server not initialized');
   }
 
   // Se o handler já existe, o servidor já foi iniciado.
-  // Isso evita que o servidor seja iniciado em cada requisição (problema de cold start).
   if (!apiHandler) {
     await apolloServer.start();
     apiHandler = express();
@@ -103,6 +103,7 @@ async function startApolloServer() {
   return apiHandler;
 }
 
+// Exporta uma função assíncrona para lidar com a requisição.
 export default async (req: Request, res: Response) => {
   const handler = await startApolloServer();
   handler(req, res);
